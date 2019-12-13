@@ -121,6 +121,7 @@ def show_result(img,
     else:
         bbox_result, segm_result = result, None
     bboxes = np.vstack(bbox_result)
+    # print(segm_result) #->None
     # draw segmentation masks
     if segm_result is not None:
         segms = mmcv.concat_list(segm_result)
@@ -134,6 +135,9 @@ def show_result(img,
         np.full(bbox.shape[0], i, dtype=np.int32)
         for i, bbox in enumerate(bbox_result)
     ]
+    # print(bbox_result)
+    # print(labels)
+
     labels = np.concatenate(labels)
     mmcv.imshow_det_bboxes(
         img,
@@ -141,6 +145,7 @@ def show_result(img,
         labels,
         class_names=class_names,
         score_thr=score_thr,
+        font_scale=1,
         show=show,
         wait_time=wait_time,
         out_file=out_file)

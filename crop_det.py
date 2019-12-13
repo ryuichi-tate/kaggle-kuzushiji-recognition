@@ -64,13 +64,13 @@ def crop_gt(bboxes, labels, x1, y1, x2, y2):
 def main():
     random.seed(0)
     np.random.seed(0)
-    dtrainval = mmcv.load('../data/dtrainval.pkl')
+    dtrainval = mmcv.load('/home/data/Tate/kaggle-data/dtrainval.pkl')
     dtrainval_crop = []
     SIZE = 1024
     LABEL_DUMMY = 4788
     crops = []
     for sample in tqdm(dtrainval):
-        img = mmcv.imread('../data/train_images/' + sample['filename'])
+        img = mmcv.imread('/home/data/Tate/kaggle-data/train_images/' + sample['filename'])
         w, h = sample['width'], sample['height']
         bboxes = sample['ann']['bboxes']
         labels = sample['ann']['labels']
@@ -86,7 +86,7 @@ def main():
                 filename = '{}_{}.png'.format(base_name, idx_crop)
                 mmcv.imwrite(
                     img_crop,
-                    '../data/train_crops/' + filename,
+                    '/home/data/Tate/kaggle-data/train_crops/' + filename,
                     auto_mkdir=True)
                 dtrainval_crop.append({
                     'filename': filename,
@@ -114,7 +114,7 @@ def main():
                 filename = '{}_{}.png'.format(base_name, idx_crop)
                 mmcv.imwrite(
                     img_crop,
-                    '../data/train_crops/' + filename,
+                    '/home/data/Tate/kaggle-data/train_crops/' + filename,
                     auto_mkdir=True)
                 dtrainval_crop.append({
                     'filename': filename,
@@ -135,8 +135,8 @@ def main():
 
     mmcv.dump(
         [im for im in dtrainval_crop if not im['filename'].startswith('umgy')],
-        '../data/dtrain_crop.pkl')
-    mmcv.dump(dtrainval_crop, '../data/dtrainval_crop.pkl')
+        '/home/data/Tate/kaggle-data/dtrain_crop.pkl')
+    mmcv.dump(dtrainval_crop, '/home/data/Tate/kaggle-data/dtrainval_crop.pkl')
 
 
 if __name__ == "__main__":

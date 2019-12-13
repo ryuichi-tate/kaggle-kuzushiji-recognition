@@ -102,3 +102,9 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+
+trained-model
+work_dirs
+sample-images
+*.otf

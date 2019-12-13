@@ -18,10 +18,10 @@ def iter_bboxes(labels):
 
 
 def prepare_train():
-    df = pd.read_csv('../data/train.csv', keep_default_na=False)
-    img_dir = Path('../data/train_images')
+    df = pd.read_csv('/home/data/Tate/kaggle-data/train.csv', keep_default_na=False)
+    img_dir = Path('/home/data/Tate/kaggle-data/train_images')
 
-    unicode_translation = pd.read_csv('../data/unicode_translation.csv')
+    unicode_translation = pd.read_csv('/home/data/Tate/kaggle-data/unicode_translation.csv')
     unicode2class = dict(
         zip(unicode_translation['Unicode'], unicode_translation.index.values))
 
@@ -51,14 +51,14 @@ def prepare_train():
 
     import random
     random.shuffle(images)
-    mmcv.dump([im for im in images if im['filename'].startswith('umgy')], '../data/dval.pkl')
-    mmcv.dump([im for im in images if not im['filename'].startswith('umgy')], '../data/dtrain.pkl')
-    mmcv.dump(images, '../data/dtrainval.pkl')
+    mmcv.dump([im for im in images if im['filename'].startswith('umgy')], '/home/data/Tate/kaggle-data/dval.pkl')
+    mmcv.dump([im for im in images if not im['filename'].startswith('umgy')], '/home/data/Tate/kaggle-data/dtrain.pkl')
+    mmcv.dump(images, '/home/data/Tate/kaggle-data/dtrainval.pkl')
 
 
 def prepare_test():
-    df = pd.read_csv('../data/sample_submission.csv', keep_default_na=False)
-    img_dir = Path('../data/test_images')
+    df = pd.read_csv('/home/data/Tate/kaggle-data/sample_submission.csv', keep_default_na=False)
+    img_dir = Path('/home/data/Tate/kaggle-data/test_images')
 
     images = []
     for img_id, row in tqdm(df.iterrows()):
@@ -75,7 +75,7 @@ def prepare_test():
                 'labels_ignore': np.array([], dtype=np.int64).reshape(-1, )
             }
         })
-    mmcv.dump(images, '../data/dtest.pkl')
+    mmcv.dump(images, '/home/data/Tate/kaggle-data/dtest.pkl')
 
 
 if __name__ == "__main__":
